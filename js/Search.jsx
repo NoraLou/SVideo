@@ -1,21 +1,33 @@
 const React = require('react')
 const data = require('../public/data')
+const ShowCard = require('./ShowCard')
 
-const Search = () => (
-  <div className='container'>
-    <div className='shows'>
-      {data.shows.map((show) => (
-        <div className='show-card'>
-          <img src={`public/img/posters/${show.poster}`} className='show-card-img' />
-          <div className='show-card-text'>
-            <h3 className='show-card-title'>{show.title}</h3>
-            <h4 className='show-card-year'>({show.year})</h4>
-            <p className='show-card-description'>{show.description}</p>
-          </div>
+const Search = React.createClass({
+  getInitialState () {
+    return {
+      searchTerm: ''
+    }
+  },
+  handleSearchTermEvent (event) {
+    this.setState({ searchTerm: event.target.value })
+  },
+  render () {
+    return (
+      <div className='container'>
+        <header className ='header'>
+          <h1 className='brand'>videos yo</h1>
+          <input value={this.state.searchTerm} className='search-input' type='text' placeholder='Search' onChange= {this.handleSearchTermEvent} />
+        </header>
+        <div className='shows'>
+          {data.shows
+            .filter((s) => `${s.title} ${s.description}`.toUpperCase().indexOf(this.state.searchTerm.toUpperCase()) >= 0)
+            .map((s) => (
+           <ShowCard {...s} key={s.imdbID} />
+          ))}
         </div>
-      ))}
-    </div>
-  </div>
-)
+      </div>
+    )
+  }
+})
 
 module.exports = Search
