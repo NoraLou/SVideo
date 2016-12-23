@@ -16,7 +16,7 @@ class Details extends React.Component {
 			<div className='video-info'>
 				<h1 className='video-title'>{title}</h1>
 				<h1 className='video-title'>({year})</h1>
-				<img className='video-poster'src={`public/img/posters/${poster}`}/>
+				<img className='video-poster'src={`/public/img/posters/${poster}`}/>
 				<p classNsme='video-description'>{description}</p>		
 			</div>
 			<div className='video-container'>
