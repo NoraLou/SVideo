@@ -1,9 +1,11 @@
 const redux = require('redux')
 const reactRedux = require('react-redux')
+const { shows } = require('../public/data.json')
 
 const SET_SEARCH_TERM = 'setSearchTerm'
 const initialState = {
-	searchTerm: ''
+	searchTerm: '',
+	shows
 }
 
 const rootReducer = (state=initialState, action) => {
@@ -26,7 +28,11 @@ const store = redux.createStore(rootReducer, initialState, redux.compose (
 ))
 
 const mapStateToProps = (state) => {
-	return {searchTerm: state.searchTerm} 
+	//console.log( 'calling mapStateToProps with state :', state)
+	return {
+		searchTerm: state.searchTerm, 
+		shows : state.shows
+	} 
 }
 
 const mapDispatchToProps = (dispatch) => {
